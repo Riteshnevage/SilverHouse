@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vithai Silver House</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-gray-800 to-slate-700 min-h-screen flex flex-col items-center py-10 text-white font-[Poppins]">
+
+  <!-- Header -->
+  <header class="text-center mb-10">
+    <h1 class="text-4xl font-extrabold text-indigo-400">🕉️ VITHAI SILVER HOUSE 🕉️</h1>
+    <p class="text-gray-300 mt-2">“Your Choice, Our Design — Crafted in Pure Silver ✨”</p>
+  </header>
+
+  <!-- Product Display Card -->
+  <div id="displayCard" class="bg-white text-black rounded-3xl shadow-2xl p-6 w-[90%] md:w-[450px] mb-10 hover:scale-[1.02] transition-transform duration-300">
+    <div class="flex flex-col items-center">
+      <img id="productImage" class="h-36 w-36 rounded-xl shadow-md object-cover mb-4 border border-gray-300"
+           src="https://m.media-amazon.com/images/I/91moiAfhRrL.jpg" alt="Silver Product" />
+
+      <h2 class="text-2xl font-bold text-gray-800 text-center">
+        <span id="productName">Silver Idol</span>
+      </h2>
+
+      <p class="text-gray-700 mt-2 text-center text-sm">
+        Owner: <span id="ownerName" class="font-semibold">Ritesh M Nevage</span>
+      </p>
+      <p class="text-gray-600 text-center text-sm">Contact: <span id="ownerContact">9766232211</span></p>
+
+      <p class="mt-2 bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-semibold">
+        Price: ₹<span id="productPrice">2500</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Add Data Form -->
+  <section class="bg-white text-gray-800 rounded-3xl shadow-2xl w-[90%] md:w-[450px] p-8 mb-10">
+    <h3 class="text-2xl font-bold text-center text-indigo-700 mb-6">Add / Update Product Data</h3>
+
+    <div class="space-y-4">
+      <input id="ownerInput" type="text" placeholder="Enter Owner Name" 
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      <input id="contactInput" type="text" placeholder="Enter Contact Number" 
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      <input id="productInput" type="text" placeholder="Enter Product Name" 
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      <input id="priceInput" type="number" placeholder="Enter Price (₹)" 
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      <input id="imageInput" type="text" placeholder="Paste Product Image URL" 
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+    </div>
+
+    <button onclick="addData()" 
+            class="w-full mt-6 bg-slate-600  text-white font-bold py-3 rounded-lg hover:bg-indigo-700 hover:shadow-lg transition cursor-pointer">
+      Save Product
+    </button>
+
+    <a href="products.html" 
+       class="block text-center mt-4 text-indigo-500 font-semibold hover:underline">
+      View All Products
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-400 text-sm mt-auto">
+    © 2025 Vithai Silver House | Designed with 💎 by Ritesh Nevage
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>

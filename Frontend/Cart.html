@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cart | Vithai SilverHouse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-[Poppins]">
+
+<header class="bg-white shadow p-4 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Cart</h1>
+    <nav class="text-sm">
+      <a href="Products.html" class="mr-4">Products</a>
+      <a href="Order.html">Orders</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6">
+  <h2 class="text-lg font-semibold mb-4">Your Cart</h2>
+  <div id="cartList" class="space-y-4"></div>
+
+  <div id="summary" class="mt-6 bg-white p-4 rounded-lg shadow hidden">
+    <div class="flex justify-between text-lg font-semibold">
+      <div>Total</div>
+      <div id="totalPrice">₹0</div>
+    </div>
+    <div class="mt-4 flex gap-2">
+      <button id="placeBtn" class="flex-1 bg-purple-600 text-white py-2 rounded">Place Order</button>
+      <a href="Products.html" class="flex-1 text-center border py-2 rounded">Continue Shopping</a>
+    </div>
+  </div>
+</main>
+
+<script>
+function loadCart(){
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const container = document.getElementById('cartList');
+  const summary = document.getElementById('summary');
+  if(cart.length === 0){
+    container.innerHTML = '<p class="text-center text-gray-500">Your cart is empty</p>';
+    summary.classList.add('hidden');
+    return;
+  }
+  summary.classList.remove('hidden');
+  let total=0;
+  container.innerHTML = cart.map((item, idx) => {
+    total += item.price * item.qty;
+    return `
+      <div class="bg-white p-4 rounded-lg shadow flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <img src="${item.img}" class="w-20 h-20 object-cover rounded" />
+          <div>
+            <h3 class="font-semibold">${item.name}</h3>
+            <p class="text-sm text-gray-600">₹${item.price.toLocaleString()}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="flex items-center bg-gray-100 rounded">
+            <button onclick="changeQty(${idx}, -1)" class="px-3">-</button>
+            <div class="px-3">${item.qty}</div>
+            <button onclick="changeQty(${idx}, 1)" class="px-3">+</button>
+          </div>
+          <div class="text-right">
+            <div class="font-semibold">₹${(item.price*item.qty).toLocaleString()}</div>
+            <button onclick="removeItem(${idx})" class="text-rose-500 mt-1">Remove</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('totalPrice').textContent = '₹' + total.toLocaleString();
+}
+
+function changeQty(i, delta){
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart[i].qty += delta;
+  if(cart[i].qty <= 0) cart.splice(i,1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
+
+function removeItem(i){
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(i,1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
+
+document.getElementById('placeBtn').addEventListener('click', ()=>{
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  if(cart.length === 0) { alert('Cart empty'); return; }
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  cart.forEach(item=>{
+    orders.unshift({
+      id: Date.now().toString() + Math.floor(Math.random()*999),
+      name: item.name,
+      price: item.price,
+      qty: item.qty,
+      img: item.img,
+      date: new Date().toLocaleDateString('en-IN'),
+      statusIndex: 0,
+      cancelled: false,
+      payment: "COD",
+      address: null
+    });
+  });
+  localStorage.setItem('orders', JSON.stringify(orders));
+  localStorage.removeItem('cart');
+  alert('Order placed!');
+  window.location.href = 'orders.html';
+});
+
+loadCart();
+</script>
+</body>
+</html>

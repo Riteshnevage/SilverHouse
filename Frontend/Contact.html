@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Vithai SilverHouse 🕉️</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-[Poppins]">
+
+  <!-- HEADER / NAVBAR -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+      <h1 class="text-3xl font-extrabold">
+        <span class="text-cyan-600">Vithai</span>
+        <span class="text-rose-500">SilverHouse</span> 🕉️
+      </h1>
+      <nav class="hidden md:flex space-x-6 font-semibold text-gray-600">
+        <a href="index.html" class="hover:text-cyan-600">Home</a>
+        <a href="Products.html" class="hover:text-cyan-600">Products</a>
+        <a href="Cart.html" class="hover:text-cyan-600">Cart</a>
+        <a href="Contact.html" class="text-cyan-600 border-b-2 border-cyan-600 pb-1">Contact</a>
+        <a href="Order.html" class="hover:text-cyan-600">Orders</a>
+        <a href="Add-Product.html" class="hover:text-cyan-600">Add Product</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-gradient-to-r from-cyan-600 to-blue-500 text-white text-center py-20">
+    <h2 class="text-5xl font-extrabold drop-shadow-lg">Contact Us</h2>
+    <p class="text-lg mt-3 opacity-90">We’d love to hear from you 💬</p>
+  </section>
+
+  <!-- CONTACT BOX -->
+  <section class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 p-8 mt-10">
+    
+    <!-- LEFT - FORM -->
+    <div class="bg-white p-8 rounded-xl shadow-xl">
+      <h3 class="text-2xl font-bold text-gray-700 mb-6">📩 Send a Message</h3>
+
+      <form id="contactForm" class="space-y-5">
+        <div>
+          <label class="font-medium text-gray-600">Full Name</label>
+          <input type="text" id="name" required
+            placeholder="Enter your full name"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cyan-600">
+        </div>
+
+        <div>
+          <label class="font-medium text-gray-600">Email</label>
+          <input type="email" id="email" required
+            placeholder="you@gmail.com"
+            class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-cyan-600">
+        </div>
+
+        <div>
+          <label class="font-medium text-gray-600">Message</label>
+          <textarea id="message" required
+            placeholder="Type your message here..."
+            class="mt-1 w-full px-4 py-2 h-32 border rounded-lg focus:ring-2 focus:ring-cyan-600"></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:opacity-90 transition">
+          Send Message ✈️
+        </button>
+      </form>
+
+      <p id="responseMsg" class="hidden mt-3 text-green-600 text-sm font-semibold">
+        ✔️ Message Sent Successfully!
+      </p>
+    </div>
+
+    <!-- RIGHT - INFO -->
+    <div class="bg-gray-900 text-white p-8 rounded-xl shadow-xl flex flex-col justify-between">
+      <div>
+        <h3 class="text-2xl font-bold text-yellow-400 mb-6">📍 Contact Information</h3>
+
+        <p class="mb-4"><strong class="text-cyan-400">Address:</strong> SilverHouse Lane, Kolhapur, Maharashtra</p>
+        <p class="mb-4"><strong class="text-cyan-400">Phone:</strong> +91 98765 43210</p>
+        <p class="mb-4"><strong class="text-cyan-400">Email:</strong> support@vithaisilverhouse.com</p>
+        <p class="mb-4"><strong class="text-cyan-400">Working Hours:</strong> Mon–Sat, 9AM to 8PM</p>
+      </div>
+
+      <iframe
+        class="rounded-lg shadow-lg border-2 border-gray-700 mt-6"
+        height="250" width="100%"
+        loading="lazy"
+        allowfullscreen
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.9955328826195!2d73.8567428143735!3d18.52043008741011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c076e0dc44c1%3A0x9cbcc5a967f0b77!2sPune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v167343252">
+      </iframe>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="text-center py-6 bg-gray-800 text-gray-300">
+    © 2025 <span class="font-bold text-white">Vithai SilverHouse</span> | Crafted with ❤️ by Ritesh
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+
+      try {
+        const res = await fetch("http://localhost:8080/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          document.getElementById("responseMsg").classList.remove("hidden");
+          document.getElementById("contactForm").reset();
+        } else {
+          alert("❌ Unable to send message. Please try again!");
+        }
+      } catch {
+        alert("⚠️ Server connection failed!");
+      }
+    });
+  </script>
+
+</body>
+</html>

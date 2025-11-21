@@ -1,0 +1,47 @@
+{
+  "name": "silverhouse",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.15",
+    "vite": "^7.1.11"
+  },
+  "dependencies": {
+    "baseline-browser-mapping": "^2.8.18",
+    "browserslist": "^4.26.3",
+    "caniuse-lite": "^1.0.30001751",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "electron-to-chromium": "^1.5.237",
+    "esbuild": "^0.25.11",
+    "escalade": "^3.2.0",
+    "express": "^5.1.0",
+    "fdir": "^6.5.0",
+    "fraction.js": "^4.3.7",
+    "mysql2": "^3.15.3",
+    "nanoid": "^3.3.11",
+    "node-releases": "^2.0.25",
+    "normalize-range": "^0.1.2",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.3",
+    "postcss-value-parser": "^4.2.0",
+    "rollup": "^4.52.5",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.15",
+    "twilio": "^5.10.3",
+    "update-browserslist-db": "^1.1.3"
+  }
+}

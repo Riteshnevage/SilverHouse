@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Add Address</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 font-[Poppins]">
+<header class="bg-white shadow p-4"><div class="max-w-4xl mx-auto"><h1 class="text-xl font-bold">Add Address</h1></div></header>
+<main class="max-w-4xl mx-auto p-6">
+  <form id="addressForm" class="bg-white p-6 rounded-lg shadow space-y-3">
+    <input id="name" placeholder="Full name" class="w-full border p-2 rounded"/>
+    <input id="phone" placeholder="Phone" class="w-full border p-2 rounded"/>
+    <input id="house" placeholder="House/Street" class="w-full border p-2 rounded"/>
+    <input id="city" placeholder="City" class="w-full border p-2 rounded"/>
+    <input id="pincode" placeholder="Pincode" class="w-full border p-2 rounded"/>
+    <div class="flex gap-3">
+      <button type="submit" class="bg-cyan-600 text-white px-4 py-2 rounded">Save Address</button>
+      <a href="Order.html" class="px-4 py-2 border rounded">Back to Orders</a>
+    </div>
+  </form>
+</main>
+
+<script>
+document.getElementById('addressForm').addEventListener('submit',(e)=>{
+  e.preventDefault();
+  const addr = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    house: document.getElementById('house').value,
+    city: document.getElementById('city').value,
+    pincode: document.getElementById('pincode').value
+  };
+  localStorage.setItem("profileAddress", JSON.stringify(addr));
+  alert("Address saved");
+  window.location.href="orders.html";
+});
+</script>
+</body>
+</html>

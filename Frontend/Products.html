@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Products | Vithai SilverHouse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-[Poppins]">
+
+<header class="bg-white shadow p-4 sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center">
+    <h1 class="text-2xl font-bold"><span class="text-purple-600">Vithai</span> <span class="text-rose-500">SilverHouse</span></h1>
+    <nav class="space-x-4 text-sm">
+      <a href="Products.html" class="text-purple-600 font-medium">Products</a>
+      <a href="Cart.html">Cart</a>
+      <a href="Order.html">Orders</a>
+    </nav>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- products injected here -->
+</main>
+
+<script>
+/* --- Sample product list (you can replace or fetch from API later) --- */
+const products = [
+  { id: 1, name: "Silver Ganesh Idol", price: 4299, img: "https://sencowebfiles.s3.ap-south-1.amazonaws.com/product-images/a6588e9d-7936-463b-b73d-dd3395852821.jpg" },
+  { id: 2, name: "Silver Coins (10gm)", price: 2399, img: "https://thumbs.dreamstime.com/b/silver-coins-bars-representing-wealth-pile-income-58521596.jpg" },
+  { id: 3, name: "Silver Fish Idol", price: 2899, img: "https://i.etsystatic.com/36041377/r/il/588d04/6863280346/il_fullxfull.6863280346_dn11.jpg" },
+  { id: 4, name: "Silver Jewelry Set", price: 4299, img: "https://brite.co/wp-content/uploads/2024/07/Image-2-205.webp" },
+  { id: 5, name: "Silver Pooja Thali", price: 4699, img: "https://lh3.googleusercontent.com/proxy/QUVqWRw428H0T69KIhLE2VTbgiMJsI83Z0SVwGsSCutSCCXdeVY4e-OMAXnVFSKfUhmPrez8o49QhtuEv0Ak4OAdkljz_NLsdOLePJg1aNc56YeZHOYK9eIHRn_BpJU2aBYNClhwPnQYUps" },
+  { id: 6, name: "Silver Bowl Set", price: 2999, img: "https://i.etsystatic.com/27448580/r/il/06d8aa/3604739540/il_1080xN.3604739540_cc52.jpg" }
+];
+
+const main = document.querySelector('main');
+
+function renderProducts(){
+  main.innerHTML = products.map(p => `
+    <div class="bg-white rounded-2xl shadow p-4 flex flex-col">
+      <img src="${p.img}" alt="${p.name}" class="w-full h-44 object-cover rounded-lg">
+      <h3 class="mt-3 font-semibold text-gray-800">${p.name}</h3>
+      <p class="text-gray-600 mt-1">₹${p.price.toLocaleString()}</p>
+      <div class="mt-4 flex gap-2">
+        <button onclick="addToCart(${p.id})" class="flex-1 bg-red-300 text-white py-2 rounded-lg hover:bg-red-400">Add to Cart</button>
+        <button onclick="buyNow(${p.id})" class="flex-1 bg-cyan-300 text-white py-2 rounded-lg hover:bg-cyan-400">Buy Now</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addToCart(id){
+  const p = products.find(x=>x.id===id);
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existing = cart.find(i=>i.id===id);
+  if(existing) existing.qty += 1;
+  else cart.push({...p, qty:1});
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(p.name + " added to cart");
+}
+
+function buyNow(id){
+  const p = products.find(x=>x.id===id);
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  const order = {
+    id: Date.now().toString(),
+    name: p.name,
+    price: p.price,
+    qty: 1,
+    img: p.img,
+    date: new Date().toLocaleDateString('en-IN'),
+    statusIndex: 0,         // 0..4: progress steps
+    cancelled: false,
+    payment: "COD",
+    address: null
+  };
+  orders.unshift(order);
+  localStorage.setItem('orders', JSON.stringify(orders));
+  window.location.href = 'Order.html';
+}
+
+renderProducts();
+</script>
+</body>
+</html>

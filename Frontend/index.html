@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title class="font-semibold text-purple-300">Vithai Silver House </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-purple-50 font-[Poppins] text-grey-800">
+    <!-- Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+        <h1 class="text-2xl font-bold text-gray-500">
+          <span class="text-cyan-500">Vithai</span> <span class="text-rose-400">  Silver  </span>  House 🕉️
+        </h1>
+        <nav class="space-x-6 text-gray-700 font-medium">
+          <a href="About.html" class="hover:text-red-900">About</a>
+          <a href="Cart.html" class="hover:text-red-900"> Cart</a>
+          <a href="Contact.html" class="hover:text-red-900">Contact</a>
+          <a href="login.html" class="hover:text-red-900">Login</a>
+          <a href="Order.html" class="hover:text-red-900">Order</a>
+          <a href="Add-Product.html" class="hover:text-gray-900">Add-Product</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-gray-900 to-gray-700 text-white py-20 text-center">
+      <h2 class="text-5xl text-pink-300 font-bold mb-4">Pure Silver Art & Design</h2>
+      <p class="text-lg text-pink-100 mb-6">Elegant handcrafted silver idols & decor for every occasion.</p>
+      <a href="Products.html" class="bg-white text-gray-900 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-200 transition">
+        Shop Now
+      </a>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="bg-gray-100 py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <h3 class="text-3xl font-semibold text-purple-600 text-center mb-10">Our Products</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition text-center">
+            <img src="https://brite.co/wp-content/uploads/2024/07/Image-2-205.webp"
+              alt="Jewelry (Rings, Chains, Earrings) "
+              class="rounded-lg w-full h-60 object-cover mb-4" />
+            <h4 class="text-lg font-semibold mb-2">Jewelry (rings, chains, earrings) </h4>
+            <p class="text-gray-600 mb-4">Pure silver handcrafted full set .</p>
+            <p class="text-gray-800 mb-2">₹9299</p>
+            <a href="#" onclick="addToCart('Jewelry (Rings, Chains, Earrings)', 9299, 'https://brite.co/wp-content/uploads/2024/07/Image-2-205.webp')" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Add to Cart</a>
+          </div>
+          
+          <div class="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition text-center">
+            <img src="https://i.etsystatic.com/36041377/r/il/588d04/6863280346/il_fullxfull.6863280346_dn11.jpg"
+              alt="Silver Fish Idol For Vasto and Home Decor."
+              class="rounded-lg w-full h-60 object-cover mb-4" />
+            <h4 class="text-lg font-semibold mb-2">Silver Fish Idol For Vasto and Home Decor</h4>
+            <p class="text-gray-600 mb-4">Graceful Idol For Your Home Table.</p>
+            <p class="text-gray-800 mb-2">₹3299</p>
+            <a href="#" onclick="addToCart('Silver Fish Idol For Vasto and Home Decor', 3299, 'https://i.etsystatic.com/36041377/r/il/588d04/6863280346/il_fullxfull.6863280346_dn11.jpg')" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Add to Cart</a>
+          </div>
+
+          <div class="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition text-center">
+            <img src="https://thumbs.dreamstime.com/b/silver-coins-bars-representing-wealth-pile-income-58521596.jpg"
+              alt="Silver Coins And Bullions"
+              class="rounded-lg w-full h-60 object-cover mb-4" />
+            <h4 class="text-lg font-semibold mb-2">Silver Coins And Bullions</h4>
+            <p class="text-gray-600 mb-4">10gm And 1kg coin price</p>
+            <p class="text-gray-800 mb-2">₹2599 for 10gm</p>
+            <a href="#" onclick="addToCart('Silver Coins And Bullions', 1599, 'https://thumbs.dreamstime.com/b/silver-coins-bars-representing-wealth-pile-income-58521596.jpg')" class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 transition">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <footer class="bg-gray-900 text-gray-300 py-6 text-center">
+      <p>© 2025 <span class="text-white font-semibold">Vithai Silver House</span>. All Rights Reserved.</p>
+    </footer>
+    <script>
+function addToCart(name, price, img) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let existing = cart.find(item => item.name == name);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ name, price, img, qty: 1 });
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  alert(`${name} added to cart!`);
+}
+</script>
+  </body>
+</html>

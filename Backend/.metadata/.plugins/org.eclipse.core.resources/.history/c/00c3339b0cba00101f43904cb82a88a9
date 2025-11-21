@@ -1,0 +1,42 @@
+package com.vithai.silverhouse.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import com.vithai.silverhouse.entity.Product;
+import com.vithai.silverhouse.service.ProductService;
+
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+    private final ProductService service;
+    public ProductController(ProductService service) 
+    { 
+    	this.service = service; 
+    }
+
+    @GetMapping
+    public List<Product> all() 
+    { 
+    	return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Product one(@PathVariable Long id) 
+    {
+    	return service.getById(id); 
+    }
+
+    @PostMapping
+    public Product create(@RequestBody Product p) 
+    {
+    	return service.save(p); 
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) 
+    {
+    	service.delete(id); 
+    }
+}
+
